@@ -32,8 +32,18 @@ const UserForm = ({ values, errors, touched, status }) => {
                         <p className="errors">{errors.name}</p>
                     )}
                 </label>
-                Email
+
+                <label>
+                    Choose a Role <br />
+                    <Field as="select" name="role">
+                        <option disabled>Choose an Option</option>
+                        <option value="section-lead">Section Lead</option>
+                        <option value="project-manager">Project Manager</option>
+                        <option value="technical-analysis">Technical Analysis</option>
+                    </Field>
+                </label>
                 <label htmlFor="email">
+                    Email
                     <Field type="email" name="email" />
                     {touched.email && errors.email && (
                         <p className="errors">{errors.email}</p>
@@ -62,6 +72,7 @@ const UserForm = ({ values, errors, touched, status }) => {
                     <ul key={user.id}>
                         <li>User: {user.name}</li>
                         <li>Email: {user.email}</li>
+                        <li>Role: {user.role}</li>
                     </ul>
                 );
             })}
@@ -74,6 +85,7 @@ const FormUserForm = withFormik({
     mapPropsToValues(props) {
         return {
             name: props.name || "",
+            role: props.role || "",
             email: props.email || "",
             password: props.password || "",
             termsofservice: props.termsofservice || false,
